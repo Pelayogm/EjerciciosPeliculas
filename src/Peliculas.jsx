@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Card, Button, Modal } from "react-bootstrap";
+import { Container, Row, Col, Card, Button, Modal, Navbar, Nav, NavDropdown } from "react-bootstrap";
 
 function Peliculas() {
   const [peliculas, setPeliculas] = useState([]);
@@ -27,6 +27,34 @@ function Peliculas() {
   };
 
   return (
+    <>
+    <Navbar bg="light" expand="lg">
+      <Container>
+        <Navbar.Brand href="#home">
+          <img src="/logoNuevo.png" style={{ width: "50px"}}/>
+          </Navbar.Brand>
+
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <NavDropdown title="Categorías" id="basic-nav-dropdown">
+            {peliculas.map((peliculaActual, index)=> (
+                <NavDropdown.Item href="#" key={index}>{peliculaActual.categoria}</NavDropdown.Item>
+              ))}
+              <NavDropdown.Divider />
+            </NavDropdown>
+
+            <NavDropdown title="Directores" id="basic-nav-dropdown">
+              {peliculas.map((peliculaActual, index)=> (
+                <NavDropdown.Item href="#" key={index}>{peliculaActual.director}</NavDropdown.Item>
+              ))}
+              <NavDropdown.Divider />
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+
     <Container fluid className="p-4">
       {selectedMovie && (
         <Row className="mb-4">
@@ -88,6 +116,7 @@ function Peliculas() {
         </Modal.Footer>
       </Modal>
     </Container>
+    </>
   );
 }
 
